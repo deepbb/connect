@@ -19,6 +19,15 @@ router.post("/",async (req,res)=>{
     }
 })
 
+router.get("/",async(req,res)=> {
+    try{
+        const allPosts = await Post.find()
+        res.status(200).json(allPosts)
+    } catch(err) {
+        res.status(400).json(err)
+    }
+})
+
 router.put("/:id",async (req,res)=>{
     try {
         const post = await Post.findById(req.params.id)
@@ -101,6 +110,16 @@ router.get("/timeline/:userId", async (req,res)=> {
 })
 //get all users posts
 
+router.get("/posts/" , async(req,res)=> {
+    try {
+        const posts = await Post.find()
+        res.status(200).json(posts)
+    } catch(err) {
+        res.status(500).json(err)
+    }
+    
+})
+
 router.get("/profile/:username", async (req,res)=> {
     try {
         const user = await User.findOne({username:req.params.username})
@@ -112,4 +131,6 @@ router.get("/profile/:username", async (req,res)=> {
 
     }
 })
+
+
 module.exports = router

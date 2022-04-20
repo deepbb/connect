@@ -54,6 +54,7 @@ router.get("/", async (req,res)=>{
 router.get("/friend/:userId", async (req,res)=> {
     try{
         const user = await User.findById(req.params.userId)
+        console.log(user);
         const friends = await Promise.all(
             user.following.map((friendId)=> {
                 return User.findById(friendId)
@@ -117,6 +118,18 @@ router.put("/:id/unfollow" ,async (req,res)=>{
     } else {
         res.status(403).json("you cannot  unfollow yourself")
     }
+})
+
+//get all users
+
+router.get("/users", async(req,res)=> {
+    try {
+        const users = await User.find()
+    res.status(200).json(users)
+    } catch(err) {
+        res.status(400).json(err)
+    }
+    
 })
 
 
