@@ -27,6 +27,8 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 
+const port = process.env.PORT || 8800
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/images");
@@ -62,7 +64,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/post", postRoute);
 
-app.listen(8800, () => {
+app.listen(port, () => {
   console.log("Backend server is running!");
 });
 
