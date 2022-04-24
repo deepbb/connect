@@ -27,7 +27,6 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 
-const port = process.env.PORT || 8800
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -48,23 +47,23 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 });
 
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname,"../frontend-design/build")));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname,"../frontend-design/build")));
 
-  app.get("*",(req,res)=> {
-    res.sendFile(path.resolve(__dirname,"../frontend-design/build","index.html"))
-  })
-} else {
-  app.get("/",(req,res)=> {
-    res.send("api is up and running")
-  })
-}
+//   app.get("*",(req,res)=> {
+//     res.sendFile(path.resolve(__dirname,"../frontend-design/build","index.html"))
+//   })
+// } else {
+//   app.get("/",(req,res)=> {
+//     res.send("api is up and running")
+//   })
+// }
 
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/post", postRoute);
 
-app.listen(port, () => {
+app.listen(8800, () => {
   console.log("Backend server is running!");
 });
 
