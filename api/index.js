@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const multer = require("multer");
+var cors = require('cors')
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/post");
@@ -12,6 +13,12 @@ const router = express.Router();
 const path = require("path");
 
 dotenv.config();
+
+const corsOptions = {
+  origin: 'https://social-media-phi-ebon.vercel.app/',
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 mongoose.connect(
   process.env.MONGO_URL,

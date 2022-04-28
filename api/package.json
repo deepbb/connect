@@ -5,10 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "server": "nodemon api",
-    "client": "npm start --prefix frontend-design",
-    "dev": "concurrently \"npm run api\" \"npm run frontend-design\"",
-    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix frontend-design && npm run build --prefix frontend-design"
+    "server": "nodemon api"
   },
   "author": "",
   "license": "ISC",
